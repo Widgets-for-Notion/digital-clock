@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+:root {
+  --bg-color: linear-gradient(135deg, #B5AEAA 15%, #D3D3D3 46%, #F7E7CE 69%, #777777 92%);
+  --custom-font: "PT Serif", serif;
+}
+
+body {
+  font-family: var(--custom-font), Arial, sans-serif;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--bg-color);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.clock {
+  /* font-size: 72px; */
+  font-size: 6vw; /* Dynamic sizing based on viewport width */
+  margin: 0;
+  font-weight: 700;
+}
+
+.date {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  /* font-size: 18px; */
+  font-size: 1.5vw; /* Dynamic sizing for a smaller font */
+}
+
+.settings-icon {
+  font-size: 24px;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: white;
+}
+
+.settings-menu {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.settings-menu label {
+  display: block;
+  margin-top: 10px;
+}
+
+.settings-menu select,
+.settings-menu button {
+  margin-top: 10px;
+  font-size: 16px;
+  padding: 5px 10px;
+  width: 100%;
+}
+
+.settings-menu button {
+  background-color: #61dafb;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.settings-menu button:hover {
+  background-color: #21a1f1;
+}

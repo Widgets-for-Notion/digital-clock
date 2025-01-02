@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Clock</title>
+    <link rel="stylesheet" href="./index.css" />
+    <script src="./index.js" defer></script>
+  </head>
+  <body>
+    <div class="settings-icon" id="settings-icon">⚙️</div>
+    <div class="clock" id="clock">12:00:00 AM</div>
+    <div class="date" id="date">Sunday</div>
+
+    <div class="settings-menu" id="settings-menu">
+      <label for="timezone">Select Timezone:</label>
+      <select id="timezone">
+        <option value="auto">Auto-detect</option>
+        <option value="UTC">UTC</option>
+        <option value="America/New_York">America/New_York (EST)</option>
+        <option value="Europe/London">Europe/London (GMT)</option>
+        <option value="Asia/Tokyo">Asia/Tokyo (JST)</option>
+        <option value="Australia/Sydney">Australia/Sydney (AEDT)</option>
+      </select>
+      <label for="background">Select Background:</label>
+      <select id="background">
+        <option value="gradient1">Gradient 1</option>
+        <option value="gradient2">Gradient 2</option>
+      </select>
+      <button id="save-settings">Save Settings</button>
+    </div>
+  </body>
+</html>

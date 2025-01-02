@@ -1,70 +1,83 @@
+// Elements
 const clockElement = document.getElementById("clock");
 const dateElement = document.getElementById("date");
 const settingsIcon = document.getElementById("settings-icon");
 const settingsMenu = document.getElementById("settings-menu");
 const timezoneSelect = document.getElementById("timezone");
 const backgroundSelect = document.getElementById("background");
+const fontSizeInput = document.getElementById("font-size");
 const saveSettingsButton = document.getElementById("save-settings");
 
-// Gradients for background
-const gradients = {
-  gradient1: "linear-gradient(135deg, #B5AEAA 15%, #D3D3D3 46%, #F7E7CE 69%, #777777 92%)",
-  gradient2: "linear-gradient(135deg, #EE7062 15%, #F046DF 46%, #9A41D5 69%, #7E4FF7 92%)",
-};
+// Load Settings
+function loadSettings() {
+  const savedTimezone = localStorage.getItem("timezone") || "auto";
+  const savedBackground = localStorage.getItem("background") || "gradient1";
+  const savedFontSize = localStorage.getItem("fontSize") || "100";
 
-// Load saved settings
-let userTimezone = localStorage.getItem("timezone") || Intl.DateTimeFormat().resolvedOptions().timeZone;
-let userBackground = localStorage.getItem("background") || "gradient1";
+  timezoneSelect.value = savedTimezone;
+  backgroundSelect.value = savedBackground;
+  fontSizeInput.value = savedFontSize;
 
-// Apply saved background
-document.documentElement.style.setProperty("--bg-color", gradients[userBackground]);
-backgroundSelect.value = userBackground;
-timezoneSelect.value = userTimezone === Intl.DateTimeFormat().resolvedOptions().timeZone ? "auto" : userTimezone;
-
-// Update clock
-function updateClock() {
-  const timezone = timezoneSelect.value === "auto" ? Intl.DateTimeFormat().resolvedOptions().timeZone : timezoneSelect.value;
-  const now = new Date();
-  const formatter = new Intl.DateTimeFormat("en-US", {
-    timeZone: timezone,
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: true,
-  });
-
-  const dayFormatter = new Intl.DateTimeFormat("en-US", {
-    timeZone: timezone,
-    weekday: "long",
-  });
-
-  clockElement.textContent = formatter.format(now);
-  dateElement.textContent = dayFormatter.format(now);
+  setFontSize(savedFontSize);
+  setBackground(savedBackground);
 }
 
-// Toggle settings menu
-function toggleSettingsMenu() {
-  settingsMenu.style.display = settingsMenu.style.display === "block" ? "none" : "block";
+function setFontSize(sizePercentage) {
+  const clockSize = (6 * sizePercentage) / 100;
+  const dateSize = (1.5 * sizePercentage) / 100;
+  document.documentElement.style.setProperty("--font-size-clock", `${clockSize}vw`);
+  document.documentElement.style.setProperty("--font-size-date", `${dateSize}vw`);
 }
 
-// Save settings
-function saveSettings() {
+function setBackground(option) {
+  let gradient;
+  if (option === "gradient1") {
+    gradient = "linear-gradient(135deg, #B5AEAA 15%, #D3D3D3 46%, #F7E7CE 69%, #777777 92%)";
+  } else if (option === "gradient2") {
+    gradient = "linear-gradient(135deg, #EE7062 15%, #F046DF 46%, #9A41D5 69%, #7E4FF7 92%)";
+  } else if (option === "auto") {
+    const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    gradient = isDarkMode
+      ? "linear-gradient(135deg, #111111 15%, #333333 46%, #555555 69%, #777777 92%)"
+      : "linear-gradient(135deg, #FFFFFF 15%, #DDDDDD 46%, #BBBBBB 69%, #999999 92%)";
+  }
+  document.documentElement.style.setProperty("--bg-color", gradient);
+}
+
+// Save Settings
+saveSettingsButton.addEventListener("click", () => {
   const selectedTimezone = timezoneSelect.value;
-  userTimezone = selectedTimezone === "auto" ? Intl.DateTimeFormat().resolvedOptions().timeZone : selectedTimezone;
-  userBackground = backgroundSelect.value;
+  const selectedBackground = backgroundSelect.value;
+  const selectedFontSize = fontSizeInput.value;
 
-  localStorage.setItem("timezone", userTimezone);
-  localStorage.setItem("background", userBackground);
+  localStorage.setItem("timezone", selectedTimezone);
+  localStorage.setItem("background", selectedBackground);
+  localStorage.setItem("fontSize", selectedFontSize);
 
-  document.documentElement.style.setProperty("--bg-color", gradients[userBackground]);
-  settingsMenu.style.display = "none"; // Hide settings menu
-  updateClock(); // Update clock immediately
+  setBackground(selectedBackground);
+  setFontSize(selectedFontSize);
+  settingsMenu.style.display = "none";
+});
+
+// Settings Toggle
+settingsIcon.addEventListener("click", () => {
+  settingsMenu.style.display = settingsMenu.style.display === "block" ? "none" : "block";
+});
+
+// Clock Update
+function updateClock() {
+  const now = new Date();
+  const hours = now.getHours() % 12 || 12;
+  const minutes = String(now.getMinutes()).padStart(2, "0");
+  const seconds = String(now.getSeconds()).padStart(2, "0");
+  const ampm = now.getHours() >= 12 ? "PM" : "AM";
+  clockElement.textContent = `${hours}:${minutes}:${seconds} ${ampm}`;
+
+  const weekday = now.toLocaleDateString("en-US", { weekday: "long" });
+  dateElement.textContent = weekday;
 }
 
-// Initialize clock
-setInterval(updateClock, 1000);
+// Initialize
+loadSettings();
 updateClock();
-
-// Event listeners
-settingsIcon.addEventListener("click", toggleSettingsMenu);
-saveSettingsButton.addEventListener("click", saveSettings);
+setInterval(updateClock, 1000);

@@ -26,7 +26,17 @@
       <select id="background">
         <option value="gradient1">Gradient 1</option>
         <option value="gradient2">Gradient 2</option>
+        <option value="auto">Auto-detect (Light/Dark Mode)</option>
       </select>
+      <label for="font-size">Clock Font Size (%):</label>
+      <input
+        type="range"
+        id="font-size"
+        min="50"
+        max="200"
+        step="10"
+        value="100"
+      />
       <button id="save-settings">Save Settings</button>
     </div>
   </body>

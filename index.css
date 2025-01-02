@@ -2,6 +2,8 @@
 
 :root {
   --bg-color: linear-gradient(135deg, #B5AEAA 15%, #D3D3D3 46%, #F7E7CE 69%, #777777 92%);
+  --font-size-clock: 6vw;
+  --font-size-date: 1.5vw;
   --custom-font: "PT Serif", serif;
 }
 
@@ -21,7 +23,7 @@ body {
 
 .clock {
   /* font-size: 72px; */
-  font-size: 6vw; /* Dynamic sizing based on viewport width */
+  font-size: var(--font-size-clock); /* Dynamic sizing based on viewport width */
   margin: 0;
   font-weight: 700;
 }
@@ -31,11 +33,12 @@ body {
   bottom: 20px;
   right: 20px;
   /* font-size: 18px; */
-  font-size: 1.5vw; /* Dynamic sizing for a smaller font */
+  font-size: var(--font-size-date); /* Dynamic sizing for a smaller font */
 }
 
 .settings-icon {
-  font-size: 24px;
+  /* font-size: 24px; */
+  font-size: 1.5vw;
   cursor: pointer;
   position: absolute;
   top: 10px;
@@ -61,11 +64,13 @@ body {
 }
 
 .settings-menu select,
-.settings-menu button {
+.settings-menu button,
+.settings-menu input[type="range"] {
   margin-top: 10px;
   font-size: 16px;
   padding: 5px 10px;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .settings-menu button {

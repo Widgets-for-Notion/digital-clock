@@ -25,8 +25,8 @@ function loadSettings() {
 
 function setFontSize(sizePercentage) {
   const clockSize = (6 * sizePercentage) / 100;
-  const dateSize = (1.5 * sizePercentage) / 100;
-  const iconSize = (1.5 * sizePercentage) / 100;
+  const dateSize = (3.5 * sizePercentage) / 100;
+  const iconSize = (3.5 * sizePercentage) / 100;
   document.documentElement.style.setProperty("--font-size-clock", `${clockSize}vw`);
   document.documentElement.style.setProperty("--font-size-date", `${dateSize}vw`);
   document.documentElement.style.setProperty("--font-size-icon", `${iconSize}vw`);

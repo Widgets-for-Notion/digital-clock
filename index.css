@@ -2,7 +2,7 @@
 
 :root {
   --bg-color: linear-gradient(135deg, #B5AEAA 15%, #D3D3D3 46%, #F7E7CE 69%, #777777 92%);
-  --font-size-clock: 6vw;
+  --font-size-clock: 7.5vw;
   --font-size-date: 3.5vw;
   --font-size-icon: 3.5vw;
   --custom-font: "PT Serif", serif;

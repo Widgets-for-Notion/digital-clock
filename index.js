@@ -1,6 +1,7 @@
 // Elements
 const clockElement = document.getElementById("clock");
 const dateElement = document.getElementById("date");
+const iconElement = document.getElementById("icon");
 const settingsIcon = document.getElementById("settings-icon");
 const settingsMenu = document.getElementById("settings-menu");
 const timezoneSelect = document.getElementById("timezone");
@@ -25,8 +26,10 @@ function loadSettings() {
 function setFontSize(sizePercentage) {
   const clockSize = (6 * sizePercentage) / 100;
   const dateSize = (1.5 * sizePercentage) / 100;
+  const iconSize = (1.5 * sizePercentage) / 100;
   document.documentElement.style.setProperty("--font-size-clock", `${clockSize}vw`);
   document.documentElement.style.setProperty("--font-size-date", `${dateSize}vw`);
+  document.documentElement.style.setProperty("--font-size-icon", `${iconSize}vw`);
 }
 
 function setBackground(option) {

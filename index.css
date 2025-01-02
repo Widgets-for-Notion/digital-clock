@@ -4,6 +4,7 @@
   --bg-color: linear-gradient(135deg, #B5AEAA 15%, #D3D3D3 46%, #F7E7CE 69%, #777777 92%);
   --font-size-clock: 6vw;
   --font-size-date: 1.5vw;
+  --font-size-icon: 1.5vw;
   --custom-font: "PT Serif", serif;
 }
 
@@ -38,7 +39,7 @@ body {
 
 .settings-icon {
   /* font-size: 24px; */
-  font-size: 1.5vw;
+  font-size: var(--font-size-icon);
   cursor: pointer;
   position: absolute;
   top: 10px;
